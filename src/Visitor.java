@@ -3,9 +3,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Visitor implements Traversal {
-	String hashedIndexFile = "Indexed.bin";
+	String hashedIndexFile = "src/Indexed.bin";
 	URL currentUrl;
-	String pattern = "(<.*>)?(?<Content>([^\\/<])+)(<\\/.*>)?";
+	String pattern = "\\s*(?<Tag1><[^\\/]*>)?(?<Content>[^<]*)?(?<Tag2><\\/.*>)?";
 	Pattern wordPattern;
 	WordIndex index;
 
@@ -22,7 +22,14 @@ public class Visitor implements Traversal {
 
 	@Override
 	public void getLine(String line) {
-		addWordsToIndex(getWords(line));
+		if(line.trim().length() > 0){
+			String[] words = getWords(line);
+			for(String s: words){
+				System.out.println(s);
+			}
+			if(words.length > 0)
+		addWordsToIndex(words);
+		}
 	}
 
 	private String[] getWords(String line) {
@@ -30,7 +37,10 @@ public class Visitor implements Traversal {
 		match.find();
 		String text = match.group("Content");
 		text = text.replaceAll("[,!.]", " ").trim();
-		return text.split("\\s+");
+		String[] foundWords = new String[0];
+		if(!text.isEmpty())
+		foundWords =  text.split("\\s+");
+		return foundWords;
 
 	}
 	private void addWordsToIndex(String[] words){

@@ -7,10 +7,11 @@ public class WordIndex {
 	private PersistentArray hashIndex;
 	private ListFile wordLists;
 	private ListFile urlLists;
-	private int arrayLength;
+	private static int arrayLength;
 
 	public static void initialize(String indexName, long indexSize) {
 		PersistentArray.initialize(indexName, (int) indexSize, -1);
+		arrayLength = (int) indexSize;
 	}
 
 	public static void delete(String indexName) {
@@ -21,7 +22,6 @@ public class WordIndex {
 		hashIndex = new PersistentArray(indexName);
 		wordLists = new ListFile(indexName);
 		urlLists = new ListFile(indexName);
-		this.arrayLength = (int) hashIndex.getLength();
 	}
 
 	public void close() {
@@ -58,7 +58,7 @@ public class WordIndex {
 	}
 
 	private int getIndex(String word) {
-		return word.hashCode() % arrayLength;
+		return Math.abs(word.hashCode()) % arrayLength;
 	}
 
 	private Long addWordToList(String word) {
