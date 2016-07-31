@@ -7,7 +7,7 @@ public class WordIndex {
 	private PersistentArray hashIndex;
 	private ListFile wordLists;
 	private ListFile urlLists;
-	private static int arrayLength;
+	private static int arrayLength = 30;
 
 	public static void initialize(String indexName, long indexSize) {
 		PersistentArray.initialize(indexName, (int) indexSize, -1);

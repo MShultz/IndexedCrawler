@@ -3,7 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Visitor implements Traversal {
-	String hashedIndexFile = "src/Indexed.bin";
+	String hashedIndexFile = "../Index Search/src/Indexed.bin";
 	URL currentUrl;
 	String pattern = "\\s*(?<Tag1><[^\\/]*>)?(?<Content>[^<]*)?(?<Tag2><\\/.*>)?";
 	Pattern wordPattern;
