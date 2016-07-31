@@ -45,9 +45,9 @@ public class WordIndex {
 
 	public Iterator<UrlEntry> getUrls(String word) {
 		ArrayList<UrlEntry> urlList = new ArrayList<UrlEntry>();
-		Entry urlWord = wordLists.get(getWordOffset(word));
-		Long offset = urlWord.getValue();
 		if (wordExists(word)) {
+			Entry urlWord = wordLists.get(getWordOffset(word));
+			Long offset = urlWord.getValue();
 			while (offset != -1) {
 				Entry url = urlLists.get(offset);
 				urlList.add(new UrlEntry(url.getString(), url.getValue()));
@@ -97,7 +97,7 @@ public class WordIndex {
 		long entryLink = hashIndex.get(getIndex(word));
 		boolean found = false;
 
-		while (!found) {
+		while (!found && entryLink != -1) {
 			Entry current = wordLists.get(entryLink);
 			if (current.getString().equals(word)) {
 				found = true;

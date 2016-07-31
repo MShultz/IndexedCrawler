@@ -24,9 +24,6 @@ public class Visitor implements Traversal {
 	public void getLine(String line) {
 		if(line.trim().length() > 0){
 			String[] words = getWords(line);
-			for(String s: words){
-				System.out.println(s);
-			}
 			if(words.length > 0)
 		addWordsToIndex(words);
 		}
@@ -36,7 +33,8 @@ public class Visitor implements Traversal {
 		Matcher match = wordPattern.matcher(line);
 		match.find();
 		String text = match.group("Content");
-		text = text.replaceAll("[,!.]", " ").trim();
+		text = text.replaceAll("[,!.\":()*]", " ").trim();
+		text = text.replaceAll("\\]\\[", "] [").trim();
 		String[] foundWords = new String[0];
 		if(!text.isEmpty())
 		foundWords =  text.split("\\s+");

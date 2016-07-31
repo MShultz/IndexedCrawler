@@ -2,9 +2,15 @@
 public class Main {
 
 	public static void main(String[] args) {
-		WordIndex.initialize("src/Indexed.bin", 30);
+		String fileName = "src/Indexed.bin";
+		WordIndex.initialize(fileName, 30);
 		WebTraversal crawl = new WebTraversal("https://www.neumont.edu", 25);
 		crawl.traverseWeb();
+		
+		UserInterface ui = new UserInterface(fileName);
+		ui.searchEngine();
+		
+		
 
 	}
 
