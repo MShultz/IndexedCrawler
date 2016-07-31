@@ -32,6 +32,7 @@ public class WebTraversal {
 			addToHasVisited(currentPage);
 			addToFoundList(formatter.formatLinks(finder.getLinks(), currentPageURL));
 		} while (visitedPages.size() < maxVisits && !visitedEqualsFound());
+		visit.closeIndex();
 	}
 
 	private void addToFoundList(Iterator<String> foundLinks) {

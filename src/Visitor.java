@@ -46,4 +46,7 @@ public class Visitor implements Traversal {
 			index.add(s, currentUrl.toString());
 		}
 	}
+	public void closeIndex(){
+		index.close();
+	}
 }

@@ -21,6 +21,7 @@ public class UserInterface {
 			}
 		}
 		System.out.println("Goodbye!");
+		cache.close();
 	}
 
 	private String promptUser() {
